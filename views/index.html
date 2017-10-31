@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>XPathify Those Selectors, the Watir way.</title>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#convert').on('click', function () {
+                        $.post("xpath", {selector: $('#selector').val()}, function (result) {
+                            $("#xpath").val(JSON.parse(result).xpath);
+                        });
+                });
+            })
+        </script>
+
+    </head>
+<body>
+<textarea id="selector"></textarea>
+<a id="convert">Convert</a>
+<textarea id="xpath"></textarea>
+</body>
+</html>
