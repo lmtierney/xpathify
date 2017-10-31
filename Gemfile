@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'rest-client'
+gem 'bootstrap', '~> 4.0.0.beta2'

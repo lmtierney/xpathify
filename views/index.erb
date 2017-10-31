@@ -8,7 +8,7 @@
             $(document).ready(function() {
                 $('#convert').on('click', function () {
                         $.post("xpath", {selector: $('#selector').val()}, function (result) {
-                            $("#xpath").val(JSON.parse(result).xpath);
+                            $("#xpath").val(result.xpath);
                         });
                 });
             })
@@ -17,7 +17,7 @@
     </head>
 <body>
 <textarea id="selector"></textarea>
-<a id="convert">Convert</a>
+<button id="convert">Convert</button>
 <textarea id="xpath"></textarea>
 </body>
 </html>
