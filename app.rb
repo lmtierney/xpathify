@@ -7,6 +7,6 @@ end
 post '/xpath' do
   content_type :json
   data = JSON.parse(request.body.read)
-  selector = data['selector']
-  {xpath: selector}.to_json
+  selectors = data.inject({}) { |h, v| h[v['name']] = v['value']; h}
+  selectors.to_json
 end

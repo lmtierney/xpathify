@@ -7,12 +7,12 @@
 
     <script type="text/javascript">
       $(document).ready(function() {
-        $('#convert').on('click', function () {
+        $('#generate').on('click', function () {
           $.ajax({
             type: 'POST',
             url: '/xpath',
-            data: JSON.stringify({selector: $('#selector').val()}),
-            success: function (data) { $("#xpath").val(data.xpath); },
+            data: JSON.stringify($('#locators').serializeArray()),
+            success: function (data) { $("#result").val(JSON.stringify(data)); },
             contentType: "application/json",
             dataType: 'json'
           });
@@ -22,16 +22,138 @@
   </head>
 <body>
 <div class="container">
-  <div class="row" style="height: 250px"></div>
-  <div class="row bg-faded">
-    <div class="col-5">
-      <textarea class="form-control" id="selector" rows="3"></textarea>
+  <div class="row" style="height: 100px"></div>
+  <form id="locators" class="container">
+    <div class="row bg-faded">
+      <div class="form-group col-sm-6">
+        <h3 class="h3">Standard Selenium Locators</h3>
+        <div class="form-group row">
+          <label for="seleniumId" class="col-form-label col-sm-4">ID</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumId" placeholder="ID" name="id">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumName" class="col-form-label col-sm-4">Name</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumName" placeholder="Name" name="name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumLinkText" class="col-form-label col-sm-4">Link Text</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumLinkText" placeholder="Link Text" name="link_text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumPartialLinkText" class="col-form-label col-sm-4">Partial Link Text</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumPartialLinkText" placeholder="Partial Link Text" name="partial_link_text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumClassName" class="col-form-label col-sm-4">Class Name</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumClassName" placeholder="Class Name" name="class_name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumTagName" class="col-form-label col-sm-4">Tag Name</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumTagName" placeholder="Tag Name" name="tag_name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumCss" class="col-form-label col-sm-4">CSS</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumCss" placeholder="CSS" name="css">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="seleniumXpath" class="col-form-label col-sm-4">XPath</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="seleniumXpath" placeholder="XPath" name="xpath">
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-sm-6">
+        <h3 class="h3">Additional Watir Locators</h3>
+        <div class="form-group row">
+          <label for="watirText" class="col-form-label col-sm-4">Text</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirText" placeholder="Text" name="text">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirData" class="col-form-label col-sm-4">Data Attribute</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirData" placeholder="Data Attributes" name="data">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirAria" class="col-form-label col-sm-4">Aria Attribute</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirAria" placeholder="Aria Attributes" name="aria">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirAttribute" class="col-form-label col-sm-4">Any Attribute</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirAttribute" placeholder="Any Attribute" name="attribute">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirPresenceAttributes" class="col-form-label col-sm-4">Presence Attributes</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirPresenceAttributes" placeholder="Presence/Absence/Multiple Attributes" name="presence_attributes">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirPresenceClasses" class="col-form-label col-sm-4">Presence Classes</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirPresenceClasses" placeholder="Presence/Absence/Multiple Classes" name="presence_classes">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirLabel" class="col-form-label col-sm-4">Label</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirLabel" placeholder="Label" name="label">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirVisible" class="col-form-label col-sm-4">Visible</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirVisible" placeholder="Visible" name="visible">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirAdjacent" class="col-form-label col-sm-4">Adjacent</label>
+          <div class="col-sm-8">
+            <input class="form-control" id="watirAdjacent" placeholder="Adjacent (parent, child, children, etc.)" name="adjacent">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="watirIndex" class="col-form-label col-sm-4">Index</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" id="watirIndex" placeholder="0" name="index">
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-2 text-center">
-      <button id="convert" type="button" class="btn btn-primary">Convert</button>
+  </form>
+  <div class="row"><br/></div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button id="generate" type="button" class="btn btn-primary">Generate</button>
     </div>
-    <div class="col-5">
-      <textarea class="form-control" id="xpath" rows="3" readonly></textarea>
+  </div>
+  <div class="row"><br/></div>
+  <div class="row">
+    <div class="col-12">
+      <label for="result" class="h2">Result</label>
+    </div>
+    <div class="col-12">
+      <textarea class="form-control" id="result" rows="3" readonly></textarea>
     </div>
   </div>
 </div>
