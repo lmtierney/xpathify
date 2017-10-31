@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>XPathify Those Selectors, the Watir way.</title>
-        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <head>
+    <title>XPathify Those Selectors, the Watir way.</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#convert').on('click', function () {
-                        $.post("xpath", {selector: $('#selector').val()}, function (result) {
-                            $("#xpath").val(result.xpath);
-                        });
-                });
-            })
-        </script>
-
-    </head>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#convert').on('click', function () {
+          $.post("xpath", {selector: $('#selector').val()}, function (result) {
+            $("#xpath").val(result.xpath);
+          });
+        });
+      })
+    </script>
+  </head>
 <body>
-<textarea id="selector"></textarea>
-<button id="convert">Convert</button>
-<textarea id="xpath"></textarea>
+<div class="container">
+  <div class="row" style="height: 250px"></div>
+  <div class="row bg-faded">
+    <div class="col-5">
+      <textarea class="form-control" id="selector" rows="3"></textarea>
+    </div>
+    <div class="col-2 text-center">
+      <button id="convert" type="button" class="btn btn-primary">Convert</button>
+    </div>
+    <div class="col-5">
+      <textarea class="form-control" id="xpath" rows="3" readonly></textarea>
+    </div>
+  </div>
+</div>
 </body>
 </html>
