@@ -5,7 +5,8 @@ get '/' do
 end
 
 post '/xpath' do
-  content_type 'application/json'
-  selector = params['selector']
+  content_type :json
+  data = JSON.parse(request.body.read)
+  selector = data['selector']
   {xpath: selector}.to_json
 end

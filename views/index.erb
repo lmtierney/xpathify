@@ -8,8 +8,13 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('#convert').on('click', function () {
-          $.post("xpath", {selector: $('#selector').val()}, function (result) {
-            $("#xpath").val(result.xpath);
+          $.ajax({
+            type: 'POST',
+            url: '/xpath',
+            data: JSON.stringify({selector: $('#selector').val()}),
+            success: function (data) { $("#xpath").val(data.xpath); },
+            contentType: "application/json",
+            dataType: 'json'
           });
         });
       })
