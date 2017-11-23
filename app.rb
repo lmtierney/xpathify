@@ -1,5 +1,6 @@
 require 'sinatra'
 require_relative 'app/helpers/builder'
+require_relative 'app/helpers/parser'
 
 include XPathify
 
@@ -9,8 +10,6 @@ end
 
 post '/xpath' do
   content_type :json
-  data = JSON.parse(request.body.read)
-  selectors = data.inject({}) { |h, v| h[v['name']] = v['value']; h}
-  kv = {selectors['attrname1'] => selectors['attrvalue1']}
-  Builder.build(kv).to_json
+  selectors = Parser.parse JSON.parse(request.body.read)
+  Builder.build(selectors).to_json
 end
