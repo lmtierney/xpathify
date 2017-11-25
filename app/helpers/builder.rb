@@ -3,7 +3,8 @@ module XPathify
     class << self
 
       def build(selectors)
-        ".//*#{attribute_expression(selectors)}"
+        tag_name = selectors.delete("tag_name") || "*"
+        ".//#{tag_name}#{attribute_expression(selectors)}"
       end
 
       private

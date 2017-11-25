@@ -82,20 +82,44 @@
   <div class="row" style="height: 25px"></div>
 
   <form id="locators">
-    <h3 class="h3">Attributes</h3>
+    <h5 class="h5">General</h5>
+
+    <div class="col-sm-10">
+      <input class="form-control" id="tagname" placeholder="Tag Name" name="tag_name">
+    </div><br />
+
+    <div class="col-sm-10">
+      <input class="form-control" id="elid" placeholder="Element ID" name="id">
+    </div><br />
+
+    <div class="col-sm-10">
+      <input class="form-control" id="elname" placeholder="Element Name" name="name">
+    </div>
+
+    <div class="row" style="height: 25px"></div>
+
+    <h5 class="h5">Custom Attributes</h5>
 
     <div id="attrtemplate" class="form-group" style="display: none">
 
-      <label for="attrtype" class="col-form-label col-sm-1">Type</label>
-      <select name="attrtype" id="attrtype" onchange="textOrBool(this);">
-        <option value="value">Value</option>
-        <option value="exist">Existence</option>
-      </select> <br/>
-
-      <label for="attrname" class="col-form-label col-sm-2">Name</label>
+      <div class="row">
+        <div class=col-sm-2>
+          <select name="attrtype" id="attrtype" onchange="textOrBool(this);">
+            <option value="value">Value</option>
+            <option value="exist">Existence</option>
+          </select>
+        </div>
+        <div class="col-sm-2">
+          <button type='button' onclick="this.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode);">Remove
+            Attribute
+          </button>
+        </div>
+      </div>
+      <br/>
       <div class="col-sm-10">
         <input class="form-control" id="attrname" placeholder="Name" name="attrname">
       </div>
+      <br/>
 
       <span id="attrboolblk" style="display: none">
         <div id="attrbool" class="col-sm-2">
@@ -107,12 +131,11 @@
       </span>
 
       <span id="attrvalueblk" style="display: block">
-        <label for="attrvalue" class="col-form-label col-sm-10">Value</label>
         <div class="col-sm-10">
           <input class="form-control" id="attrvalue" placeholder="Value" name="attrvalue">
         </div>
       </span>
-      <button type='button' onclick="this.parentNode.parentNode.removeChild(this.parentNode);">Remove Attribute</button>
+      <br />
     </div>
 
     <button type='button' id="end_attributes" onclick="moreFields('attrtemplate')">Add Attribute</button>
