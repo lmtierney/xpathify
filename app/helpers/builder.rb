@@ -3,20 +3,28 @@ module XPathify
     class << self
 
       def build(selectors)
-        xpath = ".//*"
-
-        unless selectors.empty?
-          xpath << "[" << attribute_expression(selectors) << "]"
-        end
-
-        xpath
+        ".//*#{attribute_expression(selectors)}"
       end
 
+      private
+
       def attribute_expression(selectors)
+        return '' if selectors.empty?
         f = selectors.map do |key, value|
-          "#{"@#{key.to_s.tr("_", "-")}"}=#{escape value}"
+          case value
+          when TrueClass
+            lhs(key)
+          when FalseClass
+            "not(#{lhs(key)})"
+          else
+            "#{lhs(key)}=#{escape value}"
+          end
         end
-        f.join(" and ")
+        "[#{f.join(" and ")}]"
+      end
+
+      def lhs(key)
+        "@#{key.to_s.tr("_", "-")}"
       end
 
       def escape(value)
