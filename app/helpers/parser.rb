@@ -4,7 +4,12 @@ module XPathify
 
       def parse(array)
         data = array.inject({}) { |h, v| h[v['name']] = v['value'] unless v['value'].empty? ; h}
-        data.each_with_object({}) do |array, hash|
+        hash = {}
+        hash["tag_name"] = data.delete("tag_name") if data.key?("tag_name")
+        hash["id"] = data.delete("id") if data.key?("id")
+        hash["name"] = data.delete("name") if data.key?("name")
+
+        data.each do |array|
           next unless array.first.include?('name')
           name, number = array.first.match(/(.*?)name(\d+)/).to_a[1..-1]
           matching = data.keys.find do |key|
@@ -13,7 +18,7 @@ module XPathify
           value = matching.include?('bool') ? eval(data[matching]) : data[matching]
           hash[array.last] = value
         end
-
+        hash
       end
     end
   end
