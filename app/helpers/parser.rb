@@ -5,9 +5,14 @@ module XPathify
       def parse(array)
         data = array.inject({}) { |h, v| h[v['name']] = v['value'] unless v['value'].empty? ; h}
         data.each_with_object({}) do |array, hash|
-          hash[array.last] = data.delete array.first.gsub('name', 'value')
+          next unless array.first.include?('name')
+          name, number = array.first.match(/(.*?)name(\d+)/).to_a[1..-1]
+          matching = data.keys.find do |key|
+            key[/#{name}(value|bool)#{number}/] && !data[key].empty?
+          end
+          value = matching.include?('bool') ? eval(data[matching]) : data[matching]
+          hash[array.last] = value
         end
-
 
       end
     end

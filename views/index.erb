@@ -23,6 +23,18 @@
   </script>
 
   <script>
+      function textOrBool(that) {
+          if (that.value == "value") {
+              document.getElementById(that.name.replace("type", "boolblk")).style.display = "none";
+              document.getElementById(that.name.replace("type", "valueblk")).style.display = "block";
+          } else {
+              document.getElementById(that.name.replace("type", "boolblk")).style.display = "block";
+              document.getElementById(that.name.replace("type", "valueblk")).style.display = "none";
+          }
+      }
+  </script>
+
+  <script>
       var counter = 0;
 
       function moreFields(template) {
@@ -74,15 +86,32 @@
 
     <div id="attrtemplate" class="form-group" style="display: none">
 
+      <label for="attrtype" class="col-form-label col-sm-1">Type</label>
+      <select name="attrtype" id="attrtype" onchange="textOrBool(this);">
+        <option value="value">Value</option>
+        <option value="exist">Existence</option>
+      </select> <br/>
+
       <label for="attrname" class="col-form-label col-sm-2">Name</label>
       <div class="col-sm-10">
         <input class="form-control" id="attrname" placeholder="Name" name="attrname">
       </div>
 
-      <label for="attrvalue" class="col-form-label col-sm-10">Value</label>
-      <div class="col-sm-10">
-        <input class="form-control" id="attrvalue" placeholder="Value" name="attrvalue">
-      </div>
+      <span id="attrboolblk" style="display: none">
+        <div id="attrbool" class="col-sm-2">
+          <label for="attrbool_yes">Present</label>
+          <input type="radio" name="attrbool" value="true"/>
+          <label for="attrbool_no">Not Present</label>
+          <input type="radio" name="attrbool" value="false"/>
+        </div>
+      </span>
+
+      <span id="attrvalueblk" style="display: block">
+        <label for="attrvalue" class="col-form-label col-sm-10">Value</label>
+        <div class="col-sm-10">
+          <input class="form-control" id="attrvalue" placeholder="Value" name="attrvalue">
+        </div>
+      </span>
       <button type='button' onclick="this.parentNode.parentNode.removeChild(this.parentNode);">Remove Attribute</button>
     </div>
 
