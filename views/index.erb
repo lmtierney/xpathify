@@ -106,8 +106,14 @@
         Remove Class
       </button><br /><br />
 
-      <div class="col-sm-10">
-        <input class="form-control" id="classname" placeholder="Name" name="classname">
+      <div class="row">
+        <select name="classpresent" id="classpresent">
+          <option value="present">Present</option>
+          <option value="absent">Absent</option>
+        </select>
+        <div class="col-sm-10">
+          <input class="form-control" id="classname" placeholder="Name" name="classname">
+        </div>
       </div>
     </div>
     <button type='button' id="end_class" onclick="moreFields('class')">Add Class</button>

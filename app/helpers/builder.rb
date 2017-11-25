@@ -30,7 +30,13 @@ module XPathify
       end
 
       def build_class_match(value)
-        "contains(concat(' ', @class, ' '), #{escape " #{value} "})"
+        if value.match(/^!/)
+          klass = escape " #{value[1..-1]} "
+          "not(contains(concat(' ', @class, ' '), #{klass}))"
+        else
+          klass = escape " #{value} "
+          "contains(concat(' ', @class, ' '), #{klass})"
+        end
       end
 
       def escape(value)

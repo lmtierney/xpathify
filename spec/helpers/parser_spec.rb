@@ -76,5 +76,28 @@ module XPathify
 
       expect(Parser.parse(array)).to eq("class" => ['foo', 'bar-bar'])
     end
+
+    it "parses positive and negative classes" do
+      array = [{"name" => "tag_name","value" => ""},
+               {"name" => "id","value" => ""},
+               {"name" => "name","value" => ""},
+               {"name" => "classpresent","value" => "present"},
+               {"name" => "classname","value" => ""},
+               {"name" => "classpresent2","value" => "present"},
+               {"name" => "classname2","value" => "foo"},
+               {"name" => "classpresent3","value" => "absent"},
+               {"name" => "classname3","value" => "bar"},
+               {"name" => "classpresent4","value" => "present"},
+               {"name" => "classname4","value" => "foobar"},
+               {"name" => "attrtype","value" => "value"},
+               {"name" => "attrname","value" => ""},
+               {"name" => "attrvalue","value" => ""},
+               {"name" => "attrtype1","value" => "value"},
+               {"name" => "attrname1","value" => ""},
+               {"name" => "attrvalue1","value" => ""}]
+
+      result = {"class" => ['foo', '!bar', 'foobar']}
+      expect(Parser.parse(array)).to eq(result)
+    end
   end
 end

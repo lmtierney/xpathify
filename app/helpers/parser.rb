@@ -13,7 +13,8 @@ module XPathify
           next unless array.first.include?('name')
           if array.first.include?('class')
             hash["class"] ||= []
-            hash["class"] << array.last
+            present = data.delete(array.first.gsub('name', 'present')) == 'present' ? '' : '!'
+            hash["class"] << "#{present}#{array.last}"
             next
           end
           name, number = array.first.match(/(.*?)name(\d+)/).to_a[1..-1]
