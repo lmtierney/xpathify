@@ -11,6 +11,11 @@ module XPathify
 
         data.each do |array|
           next unless array.first.include?('name')
+          if array.first.include?('class')
+            hash["class"] ||= []
+            hash["class"] << array.last
+            next
+          end
           name, number = array.first.match(/(.*?)name(\d+)/).to_a[1..-1]
           matching = data.keys.find do |key|
             key[/#{name}(value|bool)#{number}/] && !data[key].empty?

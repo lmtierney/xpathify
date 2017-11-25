@@ -36,5 +36,11 @@ module XPathify
       selector = {"foo" => "bar", "foobar" => true}
       expect(Builder.build(selector)).to eq ".//*[@foo='bar' and @foobar]"
     end
+
+    it "multiple classes" do
+      selector = {"class" => ['foo', 'bar-bar']}
+      result = ".//*[(contains(concat(' ', @class, ' '), ' foo ') and contains(concat(' ', @class, ' '), ' bar-bar '))]"
+      expect(Builder.build(selector)).to eq result
+    end
   end
 end

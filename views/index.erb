@@ -43,9 +43,9 @@
           newFields.style.display = 'block';
 
           updateChildren(newFields);
-          newFields.id = template.replace("template", "") + counter;
+          newFields.id = template + counter;
 
-          var insertHere = document.getElementById('end_attributes');
+          var insertHere = document.getElementById('end_' + template);
           insertHere.parentNode.insertBefore(newFields, insertHere);
       }
 
@@ -70,7 +70,8 @@
       }
 
       window.onload = function () {
-          moreFields("attrtemplate");
+          moreFields("attr");
+          moreFields("class");
       }
   </script>
 
@@ -82,7 +83,7 @@
   <div class="row" style="height: 25px"></div>
 
   <form id="locators">
-    <h5 class="h5">General</h5>
+    <h3 class="h3">General</h3>
 
     <div class="col-sm-10">
       <input class="form-control" id="tagname" placeholder="Tag Name" name="tag_name">
@@ -98,9 +99,24 @@
 
     <div class="row" style="height: 25px"></div>
 
-    <h5 class="h5">Custom Attributes</h5>
+    <h3 class="h3">Classes</h3>
 
-    <div id="attrtemplate" class="form-group" style="display: none">
+    <div id="class" class="form-group" style="display: none">
+      <button type='button' onclick="this.parentNode.parentNode.removeChild(this.parentNode);">
+        Remove Class
+      </button><br /><br />
+
+      <div class="col-sm-10">
+        <input class="form-control" id="classname" placeholder="Name" name="classname">
+      </div>
+    </div>
+    <button type='button' id="end_class" onclick="moreFields('class')">Add Class</button>
+
+    <div class="row" style="height: 25px"></div>
+
+    <h3 class="h3">Attributes</h3>
+
+    <div id="attr" class="form-group" style="display: none">
 
       <div class="row">
         <div class=col-sm-2>
@@ -138,7 +154,7 @@
       <br />
     </div>
 
-    <button type='button' id="end_attributes" onclick="moreFields('attrtemplate')">Add Attribute</button>
+    <button type='button' id="end_attr" onclick="moreFields('attr')">Add Attribute</button>
 
   </form>
   <div class="row"><br/></div>

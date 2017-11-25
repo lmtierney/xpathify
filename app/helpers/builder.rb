@@ -12,10 +12,11 @@ module XPathify
       def attribute_expression(selectors)
         return '' if selectors.empty?
         f = selectors.map do |key, value|
-          case value
-          when TrueClass
+          if value.is_a?(Array) && key == "class"
+            "(" + value.map { |v| build_class_match(v) }.join(" and ") + ")"
+          elsif value == true
             lhs(key)
-          when FalseClass
+          elsif value == false
             "not(#{lhs(key)})"
           else
             "#{lhs(key)}=#{escape value}"
@@ -26,6 +27,10 @@ module XPathify
 
       def lhs(key)
         "@#{key.to_s.tr("_", "-")}"
+      end
+
+      def build_class_match(value)
+        "contains(concat(' ', @class, ' '), #{escape " #{value} "})"
       end
 
       def escape(value)
