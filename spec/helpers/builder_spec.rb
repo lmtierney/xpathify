@@ -42,5 +42,11 @@ module XPathify
       result = ".//*[(contains(concat(' ', @class, ' '), ' foo ') and contains(concat(' ', @class, ' '), ' bar-bar '))]"
       expect(Builder.build(selector)).to eq result
     end
+
+    it "positive and negative classes" do
+      selector = {"class" => ['foo', '!bar', 'foobar']}
+      result = ".//*[(contains(concat(' ', @class, ' '), ' foo ') and not(contains(concat(' ', @class, ' '), ' bar ')) and contains(concat(' ', @class, ' '), ' foobar '))]"
+      expect(Builder.build(selector)).to eq result
+    end
   end
 end
