@@ -59,5 +59,22 @@ module XPathify
 
       expect(Parser.parse(array)).to eq("foo" => "bar", "foobar" => true)
     end
+
+    it "parses multiple classes" do
+      array = [{"name" => "tag_name","value" => ""},
+               {"name" => "id","value" => ""},
+               {"name" => "name","value" => ""},
+               {"name" => "classname","value" => ""},
+               {"name" => "classname2","value" => "foo"},
+               {"name" => "classname3","value" => "bar-bar"},
+               {"name" => "attrtype","value" => "value"},
+               {"name" => "attrname","value" => ""},
+               {"name" => "attrvalue","value" => ""},
+               {"name" => "attrtype1","value" => "value"},
+               {"name" => "attrname1","value" => ""},
+               {"name" => "attrvalue1","value" => ""}]
+
+      expect(Parser.parse(array)).to eq("class" => ['foo', 'bar-bar'])
+    end
   end
 end
