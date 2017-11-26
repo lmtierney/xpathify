@@ -26,7 +26,11 @@ module XPathify
       end
 
       def lhs(key)
+        if key == :text || key == 'text'
+          'normalize-space()'
+        else
         "@#{key.to_s.tr("_", "-")}"
+        end
       end
 
       def build_class_match(value)

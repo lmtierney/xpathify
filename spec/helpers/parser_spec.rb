@@ -99,5 +99,21 @@ module XPathify
       result = {"class" => ['foo', '!bar', 'foobar']}
       expect(Parser.parse(array)).to eq(result)
     end
+
+    it "text" do
+      array = [{"name" => "tag_name","value" => "div"},
+               {"name" => "id","value" => ""},
+               {"name" => "name","value" => ""},
+               {"name" => "text","value" => "This is my text"},
+               {"name" => "classpresent","value" => "present"},
+               {"name" => "classname","value" => ""},
+               {"name" => "attrtype","value" => "value"},
+               {"name" => "attrname","value" => ""},
+               {"name" => "attrvalue","value" => ""}]
+
+
+      result = {"tag_name"=>"div", "text" => "This is my text"}
+      expect(Parser.parse(array)).to eq(result)
+    end
   end
 end

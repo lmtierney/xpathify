@@ -48,5 +48,11 @@ module XPathify
       result = ".//*[(contains(concat(' ', @class, ' '), ' foo ') and not(contains(concat(' ', @class, ' '), ' bar ')) and contains(concat(' ', @class, ' '), ' foobar '))]"
       expect(Builder.build(selector)).to eq result
     end
+
+    it "text" do
+      selector = {"tag_name"=>"div", "text" => "This is my text"}
+      result = ".//div[normalize-space()='This is my text']"
+      expect(Builder.build(selector)).to eq result
+    end
   end
 end

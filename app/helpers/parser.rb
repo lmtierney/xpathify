@@ -8,6 +8,7 @@ module XPathify
         hash["tag_name"] = data.delete("tag_name") if data.key?("tag_name")
         hash["id"] = data.delete("id") if data.key?("id")
         hash["name"] = data.delete("name") if data.key?("name")
+        hash["text"] = data.delete("text") if data.key?("text")
 
         data.each do |array|
           next unless array.first.include?('name')
