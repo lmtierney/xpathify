@@ -10,6 +10,6 @@ end
 
 post '/xpath' do
   content_type :json
-  selectors = Parser.parse JSON.parse(request.body.read)
-  Builder.build(selectors).to_json
+  selector = Parser.parse JSON.parse(request.body.read)
+  Builder.build(selector).to_json
 end
